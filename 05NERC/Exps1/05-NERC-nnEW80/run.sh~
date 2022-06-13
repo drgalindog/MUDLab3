@@ -1,0 +1,12 @@
+#! /bin/bash
+
+BASEDIR=/home/dianarocio/Documents/UPC_2022_I/MUD/05-NERC-nn/05-NERC-nn
+export PYTHONPATH=$BASEDIR/util
+
+# train NN
+echo "Training NN"
+python3 train.py $BASEDIR/data/train $BASEDIR/data/devel mymodel
+
+# run model on devel data and compute performance
+echo "Predicting and evaluatig"
+python3 predict.py mymodel $BASEDIR/data/devel devel1.out | tee devel.stats
